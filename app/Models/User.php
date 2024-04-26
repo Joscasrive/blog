@@ -9,9 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -62,4 +64,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+//Relacion uno a muchos
+public function posts(){
+    return $this->hasMany('App\Models\Post');
+}
+
+
 }
