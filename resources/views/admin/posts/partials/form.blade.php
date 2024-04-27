@@ -27,7 +27,6 @@
     @foreach ($tags as $tag)
     <label class="mr-2">
         <input type="checkbox" name="tags[]" value="{{ $tag->id }}" @isset($select){{ in_array($tag->id, $select)? 'checked' : '' }}@endisset>
-        
         {{ $tag->name }}
     </label>
 @endforeach
