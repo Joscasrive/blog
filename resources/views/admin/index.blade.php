@@ -69,6 +69,7 @@
        
 @stop
 @section('js')
+{{-- Cdn --}}
 <script src="https://kit.fontawesome.com/7b2e84a63f.js" crossorigin="anonymous"></script>
 
 
