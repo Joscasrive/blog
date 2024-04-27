@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -42,6 +43,7 @@ class PostController extends Controller
                'url' => $url
            ]);
         }
+        Cache::flush();
         return redirect()->route('admin.posts.create')->with('info','The posts was create successfully.');
         
     }
@@ -81,6 +83,7 @@ class PostController extends Controller
             ]);
         }
        }
+       Cache::flush();
        return redirect()->route('admin.posts.edit',$post)->with('info','The posts was update successfully.');
     
     }
@@ -90,7 +93,7 @@ class PostController extends Controller
     { 
         Gate::authorize('update', $post);
         $post->delete();
-        
+        Cache::flush();
         return redirect()->route('admin.posts.index',$post)->with('info','The posts was delete successfully.');      
     }
 }

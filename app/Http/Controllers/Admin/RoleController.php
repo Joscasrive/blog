@@ -34,13 +34,6 @@ class RoleController extends Controller
        return redirect()->route('admin.roles.create')->with('info','The role was created successfully');
     }
 
-   
-    public function show(Role $role)
-    {
-        //
-    }
-
-    
     public function edit(Role $role)
     {
         $permissions = Permission::all();
@@ -51,12 +44,17 @@ class RoleController extends Controller
     
     public function update(Request $request, Role $role)
     {
-        //
+        $request->validate(['name'=>'required']);
+        $role->update($request->all());
+        $role->permissions()->sync($request->permissions);
+
+        return redirect()->route('admin.roles.edit',$role)->with('info','The role was updated successfully');
     }
 
     
     public function destroy(Role $role)
     {
-        //
+       $role->delete();
+       return redirect()->route('admin.roles.index')->with('info','The role was deleted successfully');
     }
 }

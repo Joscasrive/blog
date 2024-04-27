@@ -74,7 +74,9 @@ Route::resource('posts', PostController::class)
     ->names('admin.posts');
 //Users Ruta
 Route::resource('users', UserController::class)->only(['index','edit','update'])
-->middleware(['can:admin.users.index,admin.users.edit'])->only(['index','edit','update'])
+->middleware(['can:admin.users.index','can:admin.users.edit'])->only(['index','edit','update'])
 ->names('admin.users');
-//Role Ruta
-Route::resource('roles', RoleController::class)->names('admin.roles');
+//Roles Ruta
+Route::resource('roles', RoleController::class)
+->middleware(['can:admin.users.index','can:admin.users.edit'])->only(['index','edit','update','create','destroy','store'])
+->names('admin.roles');
