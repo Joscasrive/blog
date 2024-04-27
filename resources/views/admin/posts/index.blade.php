@@ -2,6 +2,7 @@
 @section('title', 'Administrator')
 
 @section('content_header')
+
   <a class="btn btn-secondary float-right" href="{{route('admin.posts.create')}}">New Post</a>
     <h1>Post List</h1>
 @stop
